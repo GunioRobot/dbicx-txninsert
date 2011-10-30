@@ -25,7 +25,7 @@ This component wrap all inserts into transactions.
 This module uses DBIx::Class internals, may be not compatible with future versions of DBIx::Class.
 
 You need to use it only in one case: last_insert_id should be called in same transaction as insert itself.
-For example in case you config is Application(DBIx::Class) <-> pgbouncer <-> postgresql server. 
+For example in case you config is Application(DBIx::Class) <-> pgbouncer <-> postgresql server.
 
 =head1 METHODS
 
@@ -40,7 +40,7 @@ sub insert {
     my $source = $self->result_source;
     $source ||= $self->result_source( $self->result_source_instance ) if $self->can('result_source_instance');
     $self->throw_exception("No result_source set on this object; can't insert") unless $source;
-    
+
     my $rollback_guard = $source->storage->txn_scope_guard;
 
     my $ret = $self->next::method(@_);
